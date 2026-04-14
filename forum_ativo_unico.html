@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DCI - Requerimentos</title>
+  <link rel="icon" type="image/png" href="https://7img.net/users/1517/14/72/66/avatars/36458-24.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+    * {
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+      cursor: url('https://2img.net/i.imgur.com/KPrzmUF.png') 8 8, auto !important;
+    }
+
+    header {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: white;
+      font-weight: bold;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #075B4B;
+      color: white;
+      text-align: center;
+      margin: 0;
+    }
+
+    .banner-container {
+      position: relative;
+      width: auto;
+      max-width: 90%;
+      margin: 20px auto;
+      border-radius: 15px;
+      z-index: 1;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      background-color: #d4af37;
+      padding: 10px;
+      display: inline-block;
+    }
+
+    .banner {
+      margin-top: 60px;
+      width: 60%;
+      background-color: rgba(0, 32, 0, 0.8);
+      border-radius: 10px;
+      animation: float 3s ease-in-out infinite;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .banner img {
+      height: auto;
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .dropdown-container {
+      width: 100%;
+      max-width: 800px;
+      margin-top: 50px;
+      position: relative;
+      max-height: calc(100vh - 200px);
+    }
+
+    .dropdown-btn {
+      background-color: white;
+      color: #075B4B;
+      padding: 18px 24px;
+      font-size: 20px;
+      font-weight: bold;
+      border: 3px solid #33ff88;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .dropdown-btn:hover {
+      background-color: rgba(0, 32, 0, 0.8);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      width: 100%;
+      overflow-y: auto;
+      border: 3px solid #33ff88;
+      border-radius: 12px;
+      z-index: 10;
+      margin-top: 8px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      bottom: auto;
+    }
+
+    h2 { margin-top: -20px; }
+
+    .dropdown-content.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      animation: dropdownOpen 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes dropdownOpen {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .dropdown-item {
+      color: #075B4B;
+      padding: 16px 20px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      border-bottom: 1px solid rgba(0, 173, 69, 0.1);
+      cursor: pointer;
+      text-align: center;
+      font-size: 18px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .dropdown-item:last-child { border-bottom: none; }
+    .dropdown-item:hover {
+      background-color: rgba(0, 173, 69, 0.1);
+      transform: translateX(5px);
+    }
+
+    .dropdown-item i {
+      margin-right: 15px;
+      font-size: 20px;
+      width: 24px;
+      text-align: center;
+      color: #00ad45;
+    }
+
+    .selected-text { font-weight: 600; }
+
+    form {
+      margin-top: 20px;
+      background: rgba(0, 32, 0, 0.8);
+      padding: 40px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 1000px;
+      text-align: center;
+      font-size: 18px;
+      border: 3px solid #33ff88;
+      display: none;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      animation: formAppear 0.5s ease;
+      margin-bottom: 50px;
+    }
+
+    @keyframes formAppear {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .input-box {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .details_span {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 10px;
+      border: 2px solid #33ff88;
+      font-size: 18px;
+      background-color: white;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="date"]:focus,
+    textarea:focus,
+    select:focus {
+      box-shadow: 0 0 10px #33ff88;
+      outline: none;
+      border-color: #00ad45;
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300ad45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 18px;
+      padding-right: 40px;
+    }
+
+    .enviar-btn {
+      width: 100%;
+      padding: 18px;
+      margin-top: 25px;
+      border-radius: 10px;
+      border: none;
+      font-size: 18px;
+      font-weight: bold;
+      background: #00ad45;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .enviar-btn:hover {
+      background: #28cc6e;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    }
+
+    .enviar-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+
+    .campo-invalido {
+      border: 2px solid #ff5252 !important;
+      background-color: #fff0f0 !important;
+      box-shadow: 0 0 8px rgba(255, 82, 82, 0.4) !important;
+    }
+
+    .erro-validacao {
+      color: #ff5252;
+      font-size: 16px;
+      margin-top: 8px;
+      text-align: center;
+      display: none;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 3px solid #33ff88;
+      animation: modalAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      margin: 0;
+    }
+
+    @keyframes modalAppear {
+      from { opacity: 0; transform: scale(0.8) translateY(-50px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-content h3 {
+      color: #00ad45;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .modal-content p {
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .modal-btn {
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .modal-btn.sim {
+      background: #00ad45;
+      color: white;
+      border: none;
+    }
+
+    .modal-btn.sim:hover {
+      background: #28cc6e;
+      transform: translateY(-2px);
+    }
+
+    .modal-btn.nao {
+      background: white;
+      color: #00ad45;
+      border: 2px solid #00ad45;
+    }
+
+    .modal-btn.nao:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+    }
+
+    @media screen and (max-width: 768px) {
+      .banner { width: 80%; margin-top: 40px; }
+      .dropdown-container { width: 85%; }
+      .dropdown-btn { padding: 15px 20px; font-size: 18px; }
+      form { padding: 30px; width: 95%; }
+      .details_span { font-size: 18px; }
+      input[type="text"], input[type="number"], input[type="date"], textarea, select { padding: 12px 15px; font-size: 16px; }
+      .enviar-btn { padding: 15px; font-size: 16px; }
+      .modal-content { width: 95%; padding: 25px; }
+    }
+
+    @media screen and (max-width: 480px) {
+      .banner { width: 95%; margin-top: 30px; }
+      header { min-height: 60px; font-size: 12px; }
+      .dropdown-container { width: 95%; margin-top: 30px; }
+      .dropdown-btn { padding: 12px 15px; font-size: 16px; }
+      .dropdown-item { padding: 14px 15px; font-size: 16px; }
+      form { padding: 20px; width: 95%; }
+      h2 { font-size: 20px; margin-top: -15px; }
+      .details_span { font-size: 16px; margin-bottom: 8px; }
+      input[type="text"], input[type="number"], input[type="date"], textarea, select { padding: 10px; font-size: 15px; }
+      .enviar-btn { padding: 12px; font-size: 15px; margin-top: 15px; }
+      .modal-content { padding: 20px; }
+      .modal-content h3 { font-size: 20px; margin-bottom: 15px; }
+      .modal-content p { font-size: 16px; margin-bottom: 20px; }
+      .modal-btn { padding: 10px 20px; font-size: 14px; }
+      select { padding-right: 35px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Desenvolvido por laurocg2 - Todos os direitos reservados a Companhia dos Supervisores ©
+  </header>
+
+  <div class="banner">
+    <img src="https://2img.net/i.imgur.com/ZCRUcgz.jpeg" alt="DEPARTAMENTO DE COMUNICAÇÃO E INTERATIVIDADE">
+  </div>
+
+  <div class="dropdown-container">
+    <button class="dropdown-btn" type="button">
+      <span class="selected-text">Selecione um tipo de requerimento &nbsp;</span>
+      <i class="fas fa-chevron-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <div class="dropdown-item" data-form="entrada"><i class="fas fa-user-plus"></i>Entrada de Membros</div>
+      <div class="dropdown-item" data-form="promocao"><i class="fas fa-arrow-up"></i>Promoção</div>
+      <div class="dropdown-item" data-form="rebaixamento"><i class="fas fa-arrow-down"></i>Rebaixamento</div>
+      <div class="dropdown-item" data-form="expulsao"><i class="fas fa-user-slash"></i>Expulsão</div>
+      <div class="dropdown-item" data-form="advertencia"><i class="fas fa-exclamation-triangle"></i>Advertência</div>
+      <div class="dropdown-item" data-form="licenca"><i class="fas fa-pause-circle"></i>Licença / Reserva</div>
+      <div class="dropdown-item" data-form="saida"><i class="fas fa-sign-out-alt"></i>Saída</div>
+      <div class="dropdown-item" data-form="prolongamento"><i class="fas fa-calendar-plus"></i>Prolongamento de Licença</div>
+      <div class="dropdown-item" data-form="retorno"><i class="fas fa-undo"></i>Retorno de Licença / Reserva</div>
+      <div class="dropdown-item" data-form="alteracao"><i class="fas fa-signature"></i>Alteração de Nickname</div>
+      <div class="dropdown-item" data-form="atualizacao"><i class="fas fa-sync-alt"></i>Atualização de Listagem</div>
+    </div>
+  </div>
+
+  <form id="entrada-form" style="display:none;">
+    <h2>Entrada de Membros</h2>
+    <div class="input-box"><span class="details_span">Nome:</span><input type="text" id="entrada-nome" required><div class="erro-validacao">Por favor, preencha o nome.</div></div>
+    <div class="input-box"><span class="details_span">Data:</span><input type="date" id="entrada-data" required><div class="erro-validacao">Por favor, selecione uma data.</div></div>
+    <button type="button" class="enviar-btn" data-form="entrada">Enviar</button>
+  </form>
+
+  <form id="promocao-form" style="display:none;">
+    <h2>Promoção de Membro</h2>
+    <div class="input-box"><span class="details_span">Nome:</span><input type="text" id="promocao-nome" required><div class="erro-validacao">Por favor, preencha o nome completo.</div></div>
+    <div class="input-box"><span class="details_span">Cargo Atual:</span><select id="promocao-cargo-atual" required><option value="">Selecione um cargo</option><option value="Assistente">Assistente</option><option value="Secretário">Secretário</option><option value="Vice-Diretor">Vice-Diretor</option><option value="Diretor">Diretor</option></select><div class="erro-validacao">Por favor, selecione o cargo atual.</div></div>
+    <div class="input-box"><span class="details_span">Novo Cargo:</span><select id="promocao-novo-cargo" required><option value="">Selecione um cargo</option><option value="Assistente">Assistente</option><option value="Secretário">Secretário</option><option value="Vice-Diretor">Vice-Diretor</option><option value="Diretor">Diretor</option></select><div class="erro-validacao">Por favor, selecione o novo cargo.</div></div>
+    <div class="input-box"><span class="details_span">Motivo:</span><input type="text" id="promocao-motivo" required><div class="erro-validacao">Por favor, descreva o motivo da promoção.</div></div>
+    <div class="input-box"><span class="details_span">Data:</span><input type="date" id="promocao-data" required><div class="erro-validacao">Por favor, selecione uma data.</div></div>
+    <button type="button" class="enviar-btn" data-form="promocao">Enviar</button>
+  </form>
+
+  <form id="rebaixamento-form" style="display:none;">
+    <h2>Rebaixamento de Membro</h2>
+    <div class="input-box"><span class="details_span">Nome:</span><input type="text" id="rebaixamento-nome" required><div class="erro-validacao">Por favor, preencha o nome completo.</div></div>
+    <div class="input-box"><span class="details_span">Cargo Atual:</span><select id="rebaixamento-cargo-atual" required><option value="">Selecione um cargo</option><option value="Assistente">Assistente</option><option value="Secretário">Secretário</option><option value="Vice-Diretor">Vice-Diretor</option><option value="Diretor">Diretor</option></select><div class="erro-validacao">Por favor, selecione o cargo atual.</div></div>
+    <div class="input-box"><span class="details_span">Novo Cargo:</span><select id="rebaixamento-novo-cargo" required><option value="">Selecione um cargo</option><option value="Assistente">Assistente</option><option value="Secretário">Secretário</option><option value="Vice-Diretor">Vice-Diretor</option><option value="Diretor">Diretor</option></select><div class="erro-validacao">Por favor, selecione o novo cargo.</div></div>
+    <div class="input-box"><span class="details_span">Motivo:</span><input type="text" id="rebaixamento-motivo" required><div class="erro-validacao">Por favor, descreva o motivo do rebaixamento.</div></div>
+    <div class="input-box"><span class="details_span">Data:</span><input type="date" id="rebaixamento-data" required><div class="erro-validacao">Por favor, selecione uma data.</div></div>
+    <button type="button" class="enviar-btn" data-form="rebaixamento">Enviar</button>
+  </form>
+
+  <form id="expulsao-form" style="display:none;">
+    <h2>Expulsão de Membro</h2>
+    <div class="input-box"><span class="details_span">Nome:</span><input type="text" id="expulsao-nome" required><div class="erro-validacao">Por favor, preencha o nome completo.</div></div>
+    <div class="input-box"><span class="details_span">Motivo:</span><input type="text" id="expulsao-motivo" required><div class="erro-validacao">Por favor, descreva o motivo da expulsão.</div></div>
+    <div class="input-box"><span class="details_span">Comprovações:</span><input type="text" id="expulsao-comprovacoes" required><div class="erro-validacao">Por favor, insira as comprovações.</div></div>
+    <button type="button" class="enviar-btn" data-form="expulsao">Enviar</button>
+  </form>
+
+  <form id="advertencia-form" style="display:none;">
+    <h2>Advertência</h2>
+    <div class="input-box"><span class="details_span">Nome:</span><input type="text" id="advertencia-nome" required><div class="erro-validacao">Por favor, preencha o nome completo.</div></div>
+    <div class="input-box"><span class="details_span">Motivo:</span><input type="text" id="advertencia-motivo" required><div class="erro-validacao">Por favor, descreva o motivo da advertência.</div></div>
+    <div class="input-box"><span class="details_span">Permissão de:</span><input type="text" id="advertencia-permissao" required><div class="erro-validacao">Por favor, indique quem concedeu a permissão.</div></div>
+    <button type="button" class="enviar-btn" data-form="advertencia">Enviar</button>
+  </form>
+
+  <form id="licenca-form" style="display:none;">
+    <h2>Licença / Reserva</h2>
+    <div class="input-box"><span class="details_span">Nome:</span><input type="text" id="licenca-nome" required><div class="erro-validacao">Por favor, preencha o nome completo.</div></div>
+    <div class="input-box"><span class="details_span">Quantidade de Dias (mínimo 7):</span><input type="number" id="licenca-dias" min="7" required><div class="erro-validacao">Por favor, insira no mínimo 7 dias.</div></div>
+    <div class="input-box"><span class="details_span">Permissão de:</span><input type="text" id="licenca-permissao" required><div class="erro-validacao">Por favor, indique quem concedeu a permissão.</div></div>
+    <button type="button" class="enviar-btn" data-form="licenca">Enviar</button>
+  </form>
+
+  <form id="saida-form" style="display:none;">
+    <h2>Saída de Membro</h2>
+    <div class="input-box"><span class="details_span">Nome:</span><input type="text" id="saida-nome" required><div class="erro-validacao">Por favor, preencha o nome completo.</div></div>
+    <div class="input-box"><span class="details_span">Motivo:</span><input type="text" id="saida-motivo" required><div class="erro-validacao">Por favor, descreva o motivo da saída.</div></div>
+    <div class="input-box"><span class="details_span">Permissão de:</span><input type="text" id="saida-permissao" required><div class="erro-validacao">Por favor, indique quem concedeu a permissão.</div></div>
+    <button type="button" class="enviar-btn" data-form="saida">Enviar</button>
+  </form>
+
+  <form id="prolongamento-form" style="display:none;">
+    <h2>Prolongamento de Licença</h2>
+    <div class="input-box"><span class="details_span">Nome:</span><input type="text" id="prolongamento-nome" required><div class="erro-validacao">Por favor, preencha o nome completo.</div></div>
+    <div class="input-box"><span class="details_span">Quantidade de Dias:</span><input type="number" id="prolongamento-dias" min="1" required><div class="erro-validacao">Por favor, insira a quantidade de dias.</div></div>
+    <div class="input-box"><span class="details_span">Permissão de:</span><input type="text" id="prolongamento-permissao" required><div class="erro-validacao">Por favor, indique quem concedeu a permissão.</div></div>
+    <button type="button" class="enviar-btn" data-form="prolongamento">Enviar</button>
+  </form>
+
+  <form id="retorno-form" style="display:none;">
+    <h2>Retorno de Licença / Reserva</h2>
+    <div class="input-box"><span class="details_span">Nome:</span><input type="text" id="retorno-nome" required><div class="erro-validacao">Por favor, preencha o nome completo.</div></div>
+    <button type="button" class="enviar-btn" data-form="retorno">Enviar</button>
+  </form>
+
+  <form id="alteracao-form" style="display:none;">
+    <h2>Alteração de Nickname</h2>
+    <div class="input-box"><span class="details_span">Cargo:</span><select id="alteracao-cargo" required><option value="">Selecione um cargo</option><option value="Assistente">Assistente</option><option value="Secretário">Secretário</option><option value="Vice-Diretor">Vice-Diretor</option><option value="Diretor">Diretor</option></select><div class="erro-validacao">Por favor, selecione o cargo.</div></div>
+    <div class="input-box"><span class="details_span">Nome na Listagem:</span><input type="text" id="alteracao-nome-antigo" required><div class="erro-validacao">Por favor, insira o nome atual na listagem.</div></div>
+    <div class="input-box"><span class="details_span">Novo Nome:</span><input type="text" id="alteracao-nome-novo" required><div class="erro-validacao">Por favor, insira o novo nome.</div></div>
+    <button type="button" class="enviar-btn" data-form="alteracao">Enviar</button>
+  </form>
+
+  <form id="atualizacao-form" style="display:none;">
+    <h2>Atualização de Listagem</h2>
+    <div class="input-box"><span class="details_span">TAG:</span><input type="text" id="atualizacao-nome" required><div class="erro-validacao">Por favor, insira a sua TAG.</div></div>
+    <button type="button" class="enviar-btn" data-form="atualizacao">Enviar</button>
+  </form>
+
+  <div class="modal-overlay" id="confirmation-modal">
+    <div class="modal-content">
+      <h3>Confirmar envio</h3>
+      <p>Deseja enviar este requerimento no tópico do fórum?</p>
+      <div class="modal-buttons">
+        <button class="modal-btn sim" id="btn-sim" type="button">Sim</button>
+        <button class="modal-btn nao" id="btn-nao" type="button">Não</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const TOPIC_ID = 37262;
+      const dropdownBtn = document.querySelector(".dropdown-btn");
+      const dropdownContent = document.querySelector(".dropdown-content");
+      const selectedText = document.querySelector(".selected-text");
+      const dropdownItems = document.querySelectorAll(".dropdown-item");
+      const forms = document.querySelectorAll("form");
+      const enviarBtns = document.querySelectorAll(".enviar-btn");
+      const modal = document.getElementById("confirmation-modal");
+      const btnSim = document.getElementById("btn-sim");
+      const btnNao = document.getElementById("btn-nao");
+
+      let formAtual = null;
+
+      function esconderFormularios() {
+        forms.forEach((form) => {
+          form.style.display = "none";
+        });
+      }
+
+      function limparErros(form) {
+        form.querySelectorAll("input, select, textarea").forEach((campo) => {
+          campo.classList.remove("campo-invalido");
+        });
+
+        form.querySelectorAll(".erro-validacao").forEach((erro) => {
+          erro.style.display = "none";
+        });
+      }
+
+      function validar(form) {
+        let valido = true;
+
+        form.querySelectorAll("input, select, textarea").forEach((campo) => {
+          const erro = campo.parentElement.querySelector(".erro-validacao");
+          campo.classList.remove("campo-invalido");
+          if (erro) erro.style.display = "none";
+
+          const valor = String(campo.value || "").trim();
+
+          if (campo.hasAttribute("required") && !valor) {
+            campo.classList.add("campo-invalido");
+            if (erro) erro.style.display = "block";
+            valido = false;
+            return;
+          }
+
+          if (campo.type === "number") {
+            const min = campo.getAttribute("min");
+            if (min && Number(valor) < Number(min)) {
+              campo.classList.add("campo-invalido");
+              if (erro) erro.style.display = "block";
+              valido = false;
+            }
+          }
+        });
+
+        return valido;
+      }
+
+      function normalizeText(text) {
+        return String(text || "").replace(/\s+/g, " ").trim().toLowerCase();
+      }
+
+      function obterTituloFormulario(form) {
+        const h2 = form.querySelector("h2");
+        return h2 ? h2.textContent.trim() : "Requerimento";
+      }
+
+      function gerarMensagemForum(form) {
+        const titulo = obterTituloFormulario(form);
+        let mensagem = `[b]${titulo}[/b]\n\n`;
+
+        form.querySelectorAll(".input-box").forEach((box) => {
+          const label = box.querySelector(".details_span");
+          const campo = box.querySelector("input, select, textarea");
+          if (!label || !campo) return;
+
+          const valor = String(campo.value || "").trim();
+          if (!valor) return;
+
+          const nomeCampo = label.textContent.trim().replace(/:+$/, "");
+          mensagem += `[b]${nomeCampo}:[/b] ${valor}\n`;
+        });
+
+        return mensagem.trim();
+      }
+
+      async function postInTopic(message) {
+        const replyUrl = `/post?t=${TOPIC_ID}&mode=reply`;
+        const openResponse = await fetch(replyUrl, {
+          method: "GET",
+          credentials: "same-origin"
+        });
+
+        const openHtml = await openResponse.text();
+        if (!openResponse.ok) {
+          throw new Error("Não foi possível abrir a página de resposta do tópico.");
+        }
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(openHtml, "text/html");
+        const form = Array.from(doc.forms).find((item) => item.querySelector('[name="message"]'));
+
+        if (!form) {
+          console.error("HTML retornado ao abrir resposta:", openHtml);
+          throw new Error("Não foi possível localizar o formulário de resposta do tópico.");
+        }
+
+        const body = new URLSearchParams();
+
+        Array.from(form.elements).forEach((field) => {
+          if (!field.name) return;
+          if ((field.type === "checkbox" || field.type === "radio") && !field.checked) return;
+          body.append(field.name, field.value || "");
+        });
+
+        body.set("message", message);
+        if (body.has("post")) body.set("post", "1");
+        else body.append("post", "1");
+
+        const actionUrl = form.getAttribute("action") || replyUrl;
+        const sendResponse = await fetch(actionUrl, {
+          method: "POST",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          body: body.toString()
+        });
+
+        const responseText = await sendResponse.text();
+        const normalized = normalizeText(responseText);
+
+        const successHints = [
+          "sua mensagem foi enviada",
+          "mensagem enviada",
+          "sua mensagem foi publicada",
+          "your message has been entered successfully",
+          "message posted successfully"
+        ];
+
+        const errorHints = [
+          "erro",
+          "error",
+          "flood",
+          "você não pode",
+          "you cannot"
+        ];
+
+        if (!sendResponse.ok) {
+          console.error("Resposta HTTP ao postar no tópico:", sendResponse.status, responseText);
+          throw new Error("Falha HTTP ao postar no tópico.");
+        }
+
+        const hasSuccess = successHints.some((hint) => normalized.includes(hint));
+        const hasError = errorHints.some((hint) => normalized.includes(hint));
+
+        if (hasError && !hasSuccess) {
+          console.error("Erro retornado pelo fórum:", responseText);
+          throw new Error("O fórum retornou um erro ao tentar publicar a resposta.");
+        }
+
+        return true;
+      }
+
+      dropdownBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        dropdownContent.classList.toggle("show");
+      });
+
+      document.addEventListener("click", function () {
+        dropdownContent.classList.remove("show");
+      });
+
+      dropdownItems.forEach((item) => {
+        item.addEventListener("click", function () {
+          const tipo = item.getAttribute("data-form");
+          esconderFormularios();
+
+          const form = document.getElementById(`${tipo}-form`);
+          if (form) {
+            form.style.display = "block";
+            limparErros(form);
+            formAtual = form;
+          }
+
+          selectedText.textContent = item.textContent.trim();
+          dropdownContent.classList.remove("show");
+        });
+      });
+
+      enviarBtns.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const tipo = btn.getAttribute("data-form");
+          const form = document.getElementById(`${tipo}-form`);
+          if (!form) return;
+
+          limparErros(form);
+          if (!validar(form)) return;
+
+          formAtual = form;
+          modal.classList.add("show");
+        });
+      });
+
+      btnSim.addEventListener("click", async function () {
+        if (!formAtual) return;
+
+        const textoOriginal = btnSim.textContent;
+        btnSim.disabled = true;
+        btnSim.textContent = "Enviando...";
+
+        try {
+          const mensagem = gerarMensagemForum(formAtual);
+          await postInTopic(mensagem);
+
+          modal.classList.remove("show");
+          alert("Requerimento postado com sucesso no fórum.");
+          formAtual.reset();
+          limparErros(formAtual);
+        } catch (error) {
+          console.error(error);
+          modal.classList.remove("show");
+          alert("Erro ao postar no fórum: " + error.message);
+        } finally {
+          btnSim.disabled = false;
+          btnSim.textContent = textoOriginal;
+        }
+      });
+
+      btnNao.addEventListener("click", function () {
+        modal.classList.remove("show");
+      });
+    });
+  </script>
+</body>
+</html>
